@@ -30,25 +30,27 @@ function init() {
 
   // Speak when clicking play button
   pressToTalk.addEventListener('click', function(){
-    // Get the text and create utterance object
-    let textToSpeech = textArea.value;
-    const utterThis = new SpeechSynthesisUtterance(textToSpeech);
-    const selectedOption = voiceSelect.selectedOptions[0].getAttribute("data-name");
-    // Find the corresponding voice and set that as the voice
-    for (let i = 0; i < voices.length; i++) {
-      if (voices[i].name === selectedOption) {
-        utterThis.voice = voices[i];
+    if (voiceSelect.value != "select") {
+      // Get the text and create utterance object
+      let textToSpeech = textArea.value;
+      const utterThis = new SpeechSynthesisUtterance(textToSpeech);
+      const selectedOption = voiceSelect.selectedOptions[0].getAttribute("data-name");
+      // Find the corresponding voice and set that as the voice
+      for (let i = 0; i < voices.length; i++) {
+        if (voices[i].name === selectedOption) {
+          utterThis.voice = voices[i];
+        }
       }
-    }
 
-    synth.speak(utterThis);
+      synth.speak(utterThis);
 
-    // Make mouth open and close
-    utterThis.onstart = () => {
-      emojiFace.setAttribute('src', 'assets/images/smiling-open.png');
-    }
-    utterThis.onend = () => {
-      emojiFace.setAttribute('src', 'assets/images/smiling.png');
+      // Make mouth open and close
+      utterThis.onstart = () => {
+        emojiFace.setAttribute('src', 'assets/images/smiling-open.png');
+      }
+      utterThis.onend = () => {
+        emojiFace.setAttribute('src', 'assets/images/smiling.png');
+      }
     }
   })
 }
