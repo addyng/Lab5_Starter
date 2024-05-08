@@ -30,7 +30,7 @@ function init() {
 
   // Speak when clicking play button
   pressToTalk.addEventListener('click', function(){
-    if (voiceSelect.value != "select") {
+    if (voiceSelect.value != "select" && textArea.value.trim() != "") {
       // Get the text and create utterance object
       let textToSpeech = textArea.value;
       const utterThis = new SpeechSynthesisUtterance(textToSpeech);
